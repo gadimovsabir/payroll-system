@@ -1,0 +1,36 @@
+{% load i18n static %}<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="{% static "hr/css/base.css" %}">
+</head>
+<body>
+  <section class="sidebar">
+    <h2>Payroll system</h2>
+    <ul>
+      <li>
+        <a class="link home" href="{% url "hr:index" %}">İşçilər</a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="container">
+    <header>
+      <a class="logout" href="#">ÇIX</a>
+    </header>
+  </section>
+    
+  <script type="text/javascript">
+    let anchors = document.querySelectorAll(".sidebar a");
+
+    for (let a of anchors) {
+      if (a.href == location.href) {
+        a.parentElement.style.backgroundColor = "rgb(241, 243, 245)";
+        break;
+      }
+    }
+  </script>
+</body>
+</html>

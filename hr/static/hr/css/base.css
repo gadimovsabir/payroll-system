@@ -1,0 +1,98 @@
+@import url(fonts.css);
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 180px;
+  position: fixed;
+  height: 100%;
+  border-right: solid 2px rgb(241, 243, 245);
+}
+
+.sidebar h2 {
+  padding: 15px;
+}
+
+.sidebar li {
+  padding: 10px;
+  list-style: none;
+}
+
+.link {
+  font-weight: 700;
+  font-size: 16px;
+  position: relative;
+  margin-left: 38px;
+}
+
+.link::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  left: -35px;
+}
+
+.home::before {
+  background: no-repeat url(../img/employees-icon.svg);
+  width: 25px;
+  height: 25px;
+}
+
+.add-employee::before {
+  background: no-repeat url(../img/add-employee-icon.svg);
+  width: 28px;
+  height: 28px;
+}
+
+.missing::before {
+  background: no-repeat url(../img/table.svg);
+}
+
+.vacations::before {
+  background: no-repeat url(../vacation-icon.svg);
+}
+
+/* CONTAINER */
+
+.container {
+  width: 100%;
+  padding: 15px 15px 0 197px;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logout {
+  font-size: 16px;
+  margin-right: 25px;
+  position: relative;
+}
+
+.logout::after {
+  content: "";
+  background-image: url(../img/logout.svg);
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 1px;
+  left: 30px;
+}
