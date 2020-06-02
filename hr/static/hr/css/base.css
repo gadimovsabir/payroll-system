@@ -48,13 +48,13 @@ a {
   left: -35px;
 }
 
-.home::before {
+.employees-icon::before {
   background: no-repeat url(../img/employees-icon.svg);
   width: 25px;
   height: 25px;
 }
 
-.add-employee::before {
+.add-employee-icon::before {
   background: no-repeat url(../img/add-employee-icon.svg);
   width: 28px;
   height: 28px;
@@ -79,6 +79,7 @@ a {
 header {
   display: flex;
   justify-content: flex-end;
+  padding-bottom: 15px;
 }
 
 .logout {
@@ -95,4 +96,8 @@ header {
   position: absolute;
   top: 1px;
   left: 30px;
+}
+
+main {
+  padding-top: 15px;
 }

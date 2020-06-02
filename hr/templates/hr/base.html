@@ -5,16 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <link rel="stylesheet" href="{% static "hr/css/base.css" %}">
+  {% block extrastyle %}{% endblock %}
 </head>
 <body>
   <section class="sidebar">
     <h2>Payroll system</h2>
     <ul>
       <li>
-        <a class="link home" href="{% url "hr:index" %}">İşçilər</a>
+        <a class="link employees-icon" href="{% url "hr:index" %}">İşçilər</a>
       </li>
       <li>
-        <a class="link add-employee" href="{% url "hr:add_employee" %}">Qeydiyyat</a>
+        <a class="link add-employee-icon" href="{% url "hr:add_employee" %}">Qeydiyyat</a>
       </li>
     </ul>
   </section>
@@ -23,6 +24,9 @@
     <header>
       <a class="logout" href="#">ÇIX</a>
     </header>
+    <main>
+    {% block main %}{% endblock %}
+    </main>
   </section>
     
   <script type="text/javascript">
