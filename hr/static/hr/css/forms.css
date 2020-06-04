@@ -16,6 +16,11 @@
   width: auto;
 }
 
+.form-row ul {
+  color: red;
+  list-style: none;
+}
+
 .submit-row {
   padding-top: 5px;
 }

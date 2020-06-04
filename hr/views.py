@@ -14,6 +14,12 @@ class AddEmployee(TemplateView):
     template_name = 'hr/add_employee.html'
 
     def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
-        context['form'] = forms.EmployeeForm()
-        return self.render_to_response(context)
+        form = forms.EmployeeForm()
+        return self.render_to_response({'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = forms.EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+        return self.render_to_response({'form': form})

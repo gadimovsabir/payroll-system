@@ -17,3 +17,9 @@ class EmployeeForm(ModelForm):
             'passport_number',
             'registered_place',
         ]
+
+        error_messages = {
+            'passport_number': {
+                'unique': 'Bu seriya nömrəsi ilə işçi artıq mövcuddur',
+            },
+        }
