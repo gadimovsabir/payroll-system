@@ -2,12 +2,17 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from . import forms
+from . import models
 
 # Create your views here.
 
 
 class Index(TemplateView):
     template_name = 'hr/index.html'
+
+    def get(self, request, *args, **kwargs):
+        employees = models.Employee.objects.all()
+        return self.render_to_response({'employees': employees})
 
 
 class AddEmployee(TemplateView):

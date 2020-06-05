@@ -1,3 +1,25 @@
 {% extends "hr/base.html" %}
+{% load i18n static %}
 
 {% block title %}Əsas səhifə{% endblock %}
+{% block extrastyle %}<link rel="stylesheet" href="{% static "hr/css/tables.css" %}">{% endblock %}
+{% block main %}
+<table class="employees-table">
+  <thead>
+    <tr>
+      <th>Soyadı</th>
+      <th>Adı</th>
+      <th>Ata adı</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for employee in employees %}
+      <tr>
+        <td><a href="#">{{ employee.last_name }}</a></td>
+        <td><a href="#">{{ employee.first_name }}</a></td>
+        <td><a href="#">{{ employee.father_name }}</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
