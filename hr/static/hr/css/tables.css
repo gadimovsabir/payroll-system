@@ -1,10 +1,16 @@
 .employees-table {
-  border: 1px solid rgb(222, 226, 230);
   border-collapse: collapse;
+}
+
+.employees-table > tbody tr:hover {
+  cursor: pointer;
+  box-shadow: inset 1px 0 0 #dadce0,
+      inset -1px 0 0 #dadce0,
+      0 1px 2px 0 rgba(60,64,67,.3),
+      0 1px 3px 1px rgba(60,64,67,.15);
 }
 
 .employees-table td, .employees-table th {
   border: 1px solid rgb(222, 226, 230);
-  padding: 12px;
-  width: 65px;
+  padding: 10px;
 }

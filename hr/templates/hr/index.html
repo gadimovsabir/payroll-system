@@ -1,7 +1,7 @@
 {% extends "hr/base.html" %}
 {% load i18n static %}
 
-{% block title %}Əsas səhifə{% endblock %}
+{% block title %}İşçilər cədvəli{% endblock %}
 {% block extrastyle %}<link rel="stylesheet" href="{% static "hr/css/tables.css" %}">{% endblock %}
 {% block main %}
 <table class="employees-table">
@@ -14,12 +14,23 @@
   </thead>
   <tbody>
     {% for employee in employees %}
-      <tr>
-        <td><a href="#">{{ employee.last_name }}</a></td>
-        <td><a href="#">{{ employee.first_name }}</a></td>
-        <td><a href="#">{{ employee.father_name }}</a></td>
-      </tr>
+    <tr data-href="{{ employee.pk }}">
+      <td>{{ employee.last_name }}</td>
+      <td>{{ employee.first_name }}</td>
+      <td>{{ employee.father_name }}</td>
+    </tr>
     {% endfor %}
   </tbody>
 </table>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+  "use strict";
+
+  let employeesTableBody = document.querySelector(".employees-table > tbody");
+
+  employeesTableBody.addEventListener("click", function(event) {
+    window.location.href += event.target.closest("tr").dataset.href;
+  });
+</script>
 {% endblock %}

@@ -40,6 +40,10 @@ a {
   margin-left: 38px;
 }
 
+.selected-link {
+  background-color: rgb(241, 243, 245);
+}
+
 .link::before {
   content: "";
   width: 22px;

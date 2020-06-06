@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 
 from . import forms
@@ -28,3 +28,11 @@ class AddEmployee(TemplateView):
             form.save()
 
         return self.render_to_response({'form': form})
+
+
+class EmployeeDetail(TemplateView):
+    template_name = 'hr/employee_detail.html'
+
+    def get(self, request, pk, *args, **kwargs):
+        employee = get_object_or_404(models.Employee, pk=pk)
+        return self.render_to_response({'employee': employee})

@@ -30,14 +30,17 @@
   </section>
     
   <script type="text/javascript">
+    "use strict";
+
     let anchors = document.querySelectorAll(".sidebar a");
 
     for (let a of anchors) {
-      if (a.href == location.href) {
-        a.parentElement.style.backgroundColor = "rgb(241, 243, 245)";
+      if (a.href == window.location.href) {
+        a.parentElement.classList.add("selected-link");
         break;
       }
     }
   </script>
+  {% block scripts %}{% endblock %}
 </body>
 </html>
