@@ -16,7 +16,7 @@
   width: auto;
 }
 
-.form-row ul {
+.form-row .errorlist {
   color: red;
   list-style: none;
 }
@@ -31,4 +31,12 @@
   padding: 6px 12px;
   border: none;
   border-radius: 4px;
+}
+
+.date-row select {
+  display: inline-block;
+}
+
+.date-row input {
+    display: none;
 }
