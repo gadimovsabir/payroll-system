@@ -11,6 +11,7 @@ class Employee(models.Model):
     gender = models.CharField(
         'cinsi',
         max_length=1,
+        default='K',
         choices=[
             ('K', 'kişi'),
             ('Q', 'qadın')
@@ -19,6 +20,7 @@ class Employee(models.Model):
     family_status = models.CharField(
         'ailə vəziyyəti',
         max_length=1,
+        default='E',
         choices=[
             ('E', 'evli'),
             ('S', 'subay')
@@ -28,6 +30,7 @@ class Employee(models.Model):
         'təhsili',
         max_length=1,
         blank=True,
+        default='A',
         choices=[
             ('A', 'ali'),
             ('O', 'orta'),
@@ -41,7 +44,12 @@ class Employee(models.Model):
         blank=True,
         null=True
     )
-    registered_place = models.CharField('qeydiyyat yeri', max_length=45, blank=True)
+    contact_number = models.CharField('əlaqə nömrəsi', max_length=30, blank=True)
+    contact_number2 = models.CharField('əlaqə nömrəsi əlavə', max_length=30, blank=True)
+    registered_place = models.CharField('qeydiyyatda olduğu yer', max_length=45, blank=True)
+    city_of_residence = models.CharField('yaşadığı şəhər/kənd', max_length=45, blank=True)
+    address = models.CharField('ünvanı', max_length=50, blank=True)
+    photo = models.ImageField('şəkli', unique=True, blank=True, null=True)
 
     class Meta:
         verbose_name = 'İşçi'

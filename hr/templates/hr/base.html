@@ -8,7 +8,7 @@
   {% block extrastyle %}{% endblock %}
 </head>
 <body>
-  <section class="sidebar">
+  <div class="sidebar">
     <h2>Payroll system</h2>
     <ul>
       <li>
@@ -18,16 +18,21 @@
         <a class="link add-employee-icon" href="{% url "hr:add_employee" %}">Qeydiyyat</a>
       </li>
     </ul>
-  </section>
+  </div>
 
-  <section class="container">
-    <header>
-      <a class="logout" href="#">ÇIX</a>
-    </header>
-    <main>
+  <header>
+    <div class="container">
+      <div class="row header-row">
+        <a class="logout" href="#">ÇIX</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div  class="container">
     {% block main %}{% endblock %}
-    </main>
-  </section>
+    </div>
+  </main>
     
   <script type="text/javascript">
     "use strict";

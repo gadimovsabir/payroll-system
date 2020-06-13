@@ -23,7 +23,7 @@ class AddEmployee(TemplateView):
         return self.render_to_response({'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = forms.EmployeeForm(request.POST)
+        form = forms.EmployeeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
 

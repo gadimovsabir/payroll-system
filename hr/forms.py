@@ -16,6 +16,11 @@ class EmployeeForm(ModelForm):
             'education',
             'passport_number',
             'registered_place',
+            'contact_number',
+            'contact_number2',
+            'city_of_residence',
+            'address',
+            'photo',
         ]
 
         error_messages = {
