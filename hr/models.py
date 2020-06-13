@@ -57,3 +57,16 @@ class Employee(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+
+class OldWorkPlace(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name='işçi')
+    company_name = models.CharField('işlədiyi şirkətin adı', max_length=250)
+    position = models.CharField('vəzifəsi', max_length=45)
+    started = models.DateField('işə başladiğı tarix')
+    finished = models.DateField('işdən çıxma tarixi')
+    cause = models.TextField('işdən çıxma səbəbi', blank=False)
+
+    class Meta:
+        verbose_name = 'köhnə iş yeri'
+        verbose_name_plural = 'köhnə iş yerləri'
