@@ -1,103 +1,175 @@
 {% extends "hr/base.html" %}
 {% load i18n static %}
-
 {% block title %}İşçi əlavə et{% endblock %}
 {% block extrastyle %}<link rel="stylesheet" href="{% static "hr/css/forms.css" %}">{% endblock %}
 {% block main %}
 <form action="{% url "hr:add_employee" %}" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
+  {% if employee_form %}
+    {% for field in employee_form %}
+      {% if field != employee_form.date_of_birth %}
+        <div class="form-row">
+          {{ field.label_tag }} {{ field }}
+          {{ field.errors }}
+        </div>
+      {% else %}
+        <div class="form-row date-row">
+          {{ field.label_tag }}
+          <select>
+            <option value="01">1</option>
+            <option value="02">2</option>
+            <option value="03">3</option>
+            <option value="04">4</option>
+            <option value="05">5</option>
+            <option value="06">6</option>
+            <option value="07">7</option>
+            <option value="08">8</option>
+            <option value="09">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+          </select>
+          <select>
+            <option value="01">Yanvar</option>
+            <option value="02">Fevral</option>
+            <option value="03">Mart</option>
+            <option value="04">Aprel</option>
+            <option value="05">May</option>
+            <option value="06">İyun</option>
+            <option value="07">İyul</option>
+            <option value="08">Avqust</option>
+            <option value="09">Sentyabr</option>
+            <option value="10">Oktyabr</option>
+            <option value="11">Noyabr</option>
+            <option value="12">Dekabr</option>
+          </select>
+          <select></select>
+          {{ field }}
+          {{ field.errors }}
+        </div>
+      {% endif %}
+    {% endfor %}
+    <div class="submit-row">
+      <button type="submit" name="_add_employee" value="_add_employee">Göndər</button>
+    </div>
 
-  {% for field in form %}
-  {% if form.date_of_birth != field %}
-  <div class="form-row">
-    {{ field.label_tag }} {{ field }}
-    {{ field.errors }}
-  </div>
-  {% else %}
-  <div class="form-row date-row">
-    {{ field.label_tag }}<br>
-    <select>
-      <option value="01">1</option>
-      <option value="02">2</option>
-      <option value="03">3</option>
-      <option value="04">4</option>
-      <option value="05">5</option>
-      <option value="06">6</option>
-      <option value="07">7</option>
-      <option value="08">8</option>
-      <option value="09">9</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
-      <option value="13">13</option>
-      <option value="14">14</option>
-      <option value="15">15</option>
-      <option value="16">16</option>
-      <option value="17">17</option>
-      <option value="18">18</option>
-      <option value="19">19</option>
-      <option value="20">20</option>
-      <option value="21">21</option>
-      <option value="22">22</option>
-      <option value="23">23</option>
-      <option value="24">24</option>
-      <option value="25">25</option>
-      <option value="26">26</option>
-      <option value="27">27</option>
-      <option value="28">28</option>
-      <option value="29">29</option>
-      <option value="30">30</option>
-      <option value="31">31</option>
-    </select>
-    <select>
-      <option value="01">Yanvar</option>
-      <option value="02">Fevral</option>
-      <option value="03">Mart</option>
-      <option value="04">Aprel</option>
-      <option value="05">May</option>
-      <option value="06">İyun</option>
-      <option value="07">İyul</option>
-      <option value="08">Avqust</option>
-      <option value="09">Sentyabr</option>
-      <option value="10">Oktyabr</option>
-      <option value="11">Noyabr</option>
-      <option value="12">Dekabr</option>
-    </select>
-    <select></select>
-    {{ field }}
-    {{ field.errors }}
-  </div>
+  {% elif old_work_place_form %}
+    <input type="number" value="{{ employee_id }}" name="employee" hidden>
+    {% for field in old_work_place_form %}
+      {% if field != old_work_place_form.started and field != old_work_place_form.finished %}
+        <div class="form-row">
+          {{ field.label_tag }} {{ field }}
+          {{ field.errors }}
+        </div>
+      {% else %}
+        <div class="form-row date-row">
+          {{ field.label_tag }}
+          <select>
+            <option value="01">1</option>
+            <option value="02">2</option>
+            <option value="03">3</option>
+            <option value="04">4</option>
+            <option value="05">5</option>
+            <option value="06">6</option>
+            <option value="07">7</option>
+            <option value="08">8</option>
+            <option value="09">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+          </select>
+          <select>
+            <option value="01">Yanvar</option>
+            <option value="02">Fevral</option>
+            <option value="03">Mart</option>
+            <option value="04">Aprel</option>
+            <option value="05">May</option>
+            <option value="06">İyun</option>
+            <option value="07">İyul</option>
+            <option value="08">Avqust</option>
+            <option value="09">Sentyabr</option>
+            <option value="10">Oktyabr</option>
+            <option value="11">Noyabr</option>
+            <option value="12">Dekabr</option>
+          </select>
+          <select></select>
+          {{ field }}
+          {{ field.errors }}
+        </div>
+      {% endif %}
+    {% endfor %}
+    <div class="submit-row">
+      <button type="submit" name="_add_another" value="_add_another">Yadda saxla və yenisini əlavə et</button>
+      <button type="submit" name="_add_and_pass" value="_add_and_pass">Yadda saxla</button>
+      <button type="submit" name="_pass" value="_pass">Növbəti</button>
+    </div>
   {% endif %}
-  {% endfor %}
-
-  <div class="submit-row">
-    <input type="submit" value="Göndər">
-  </div>
 </form>
 {% endblock %}
 {% block scripts %}
-  <script type="text/javascript">
-    "use strict";
+<script type="text/javascript">
+  "use strict";
 
-    let dateRow = document.querySelector(".date-row");
-    let selectFields = dateRow.querySelectorAll("select"); 
-    let currentYear = new Date().getFullYear();
-    let inputField = document.querySelector(".date-row input");
+  let dateRowList = document.querySelectorAll(".date-row");
+  let currentYear = new Date().getFullYear();
 
-    for (let age = 14; age < 100; age++) {
+  dateRowList.forEach(function(dateRow) {
+    let selectFields = dateRow.querySelectorAll("select");
+    let inputField = dateRow.querySelector(".date-row input");
+    
+    for (let year = 0; year < 100; year++) {
       let option = document.createElement("option");
-      option.value = currentYear - age;
-      option.textContent = currentYear - age;
+      option.value = currentYear - year;
+      option.textContent = currentYear - year;
       selectFields[2].append(option)
     }
-
-    inputField.value = inputField.value || `${currentYear - 14}-01-01`;
+    
+    inputField.value = inputField.value || `${currentYear}-01-01`;
     selectFields[0].value = inputField.value.slice(8);
     selectFields[1].value = inputField.value.slice(5, 7);
     selectFields[2].value = inputField.value.slice(0, 4);
-
+    
     dateRow.onchange = function() {
       inputField.value = `${selectFields[2].value}-${selectFields[1].value}-${selectFields[0].value}`;
     }
-  </script>
+  });
+</script>
 {% endblock %}

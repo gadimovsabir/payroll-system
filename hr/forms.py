@@ -28,3 +28,15 @@ class EmployeeForm(ModelForm):
                 'unique': 'Bu seriya nömrəsi ilə işçi artıq mövcuddur',
             },
         }
+
+
+class OldWorkPlaceForm(ModelForm):
+    class Meta:
+        model = models.OldWorkPlace
+        fields = [
+            'company_name',
+            'position',
+            'started',
+            'finished',
+            'cause',
+        ]
