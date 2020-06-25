@@ -7,7 +7,6 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
 }
 
 a {
@@ -22,21 +21,20 @@ a {
   position: fixed;
   height: 100%;
   border-right: solid 2px rgb(241, 243, 245);
-  background-color: white;
+  background-color: rgb(255, 255, 255);
 }
 
 .sidebar h2 {
   padding: 15px;
+  font-size: 1.4em;
 }
 
 .sidebar li {
   padding: 10px;
-  list-style: none;
 }
 
 .link {
   font-weight: 700;
-  font-size: 16px;
   position: relative;
   margin-left: 38px;
 }
@@ -47,22 +45,18 @@ a {
 
 .link::before {
   content: "";
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   position: absolute;
   left: -35px;
 }
 
 .employees-icon::before {
   background: no-repeat url(../img/employees-icon.svg);
-  width: 25px;
-  height: 25px;
 }
 
 .add-employee-icon::before {
   background: no-repeat url(../img/add-employee-icon.svg);
-  width: 28px;
-  height: 28px;
 }
 
 /* MAIN */
@@ -73,8 +67,7 @@ header {
 
 .container {
   width: 100%;
-  padding: 15px;
-  padding-left: 197px;
+  padding: 15px 15px 15px 197px;
   box-sizing: border-box;
 }
 
@@ -87,17 +80,89 @@ header {
 }
 
 .logout {
-  font-size: 16px;
   margin-right: 25px;
   position: relative;
 }
 
 .logout::after {
   content: "";
-  background-image: url(../img/logout.svg);
+  background-image: url(../img/logout-icon.svg);
   width: 16px;
   height: 16px;
   position: absolute;
   top: 1px;
   left: 30px;
+}
+
+.photo {
+  display: block;
+  margin: auto;
+  padding: 3px;
+  border: solid 1px rgb(241, 243, 245);
+  box-shadow: 2px 2px 3px #dadce0,
+    -2px -2px 3px #dadce0;
+}
+
+.photo-size {
+  width: 200px;
+  height: 266px;
+}
+
+/* TABLES */
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid rgb(222, 226, 230);
+  padding: 7px;
+}
+
+.employees-table > tbody tr:hover {
+  cursor: pointer;
+  box-shadow: inset 1px 0 0 #dadce0,
+    inset -1px 0 0 #dadce0,
+    0 1px 2px 0 rgba(60,64,67,.3),
+    0 1px 3px 1px rgba(60,64,67,.15);
+}
+
+/* FORMS */
+
+.form-row {
+  padding: 5px 0;
+}
+
+.form-row label {
+  display: block;
+}
+
+form input, form select {
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.errorlist li {
+  list-style: none;
+  color: red;
+}
+
+.submit-row input {
+  background-color: rgb(0, 123, 255);
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 123, 255);
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+}
+
+.submit-row input:hover {
+  background-color: #0069d9;
+  cursor: pointer;
+  transition: background-color .15s ease-in-out;
+}
+
+/* COLUMNS */
+
+.col-lg-3 {
+  width: 25%;
 }

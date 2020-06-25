@@ -1,9 +1,9 @@
-from django.forms import ModelForm
+from django import forms
 
 from . import models
 
 
-class EmployeeForm(ModelForm):
+class EmployeeForm(forms.ModelForm):
     class Meta:
         model = models.Employee
         fields = [
@@ -16,27 +16,26 @@ class EmployeeForm(ModelForm):
             'education',
             'passport_number',
             'registered_place',
-            'contact_number',
-            'contact_number2',
             'city_of_residence',
             'address',
-            'photo',
+            'contact_number',
+            'contact_number2',
+            'photo'
         ]
 
-        error_messages = {
-            'passport_number': {
-                'unique': 'Bu seriya nömrəsi ilə işçi artıq mövcuddur',
-            },
-        }
 
-
-class OldWorkPlaceForm(ModelForm):
+class OldWorkPlaceForm(forms.ModelForm):
     class Meta:
         model = models.OldWorkPlace
         fields = [
             'company_name',
             'position',
-            'started',
-            'finished',
-            'cause',
+            'started_work',
+            'finished_work',
+            'reason_of_leave',
+            'employee'
         ]
+
+        widgets = {
+            'employee': forms.HiddenInput
+        }

@@ -1,24 +1,22 @@
 {% extends "hr/base.html" %}
 {% load i18n static %}
-
 {% block title %}İşçilər cədvəli{% endblock %}
-{% block extrastyle %}<link rel="stylesheet" href="{% static "hr/css/tables.css" %}">{% endblock %}
 {% block main %}
 <table class="employees-table">
   <thead>
     <tr>
-      <th>Soyadı</th>
       <th>Adı</th>
+      <th>Soyadı</th>
       <th>Ata adı</th>
     </tr>
   </thead>
   <tbody>
     {% for employee in employees %}
-    <tr data-href="{{ employee.pk }}">
-      <td>{{ employee.last_name }}</td>
-      <td>{{ employee.first_name }}</td>
-      <td>{{ employee.father_name }}</td>
-    </tr>
+      <tr data-href="{{ employee.id }}">
+        <td>{{ employee.first_name }}</td>
+        <td>{{ employee.last_name }}</td>
+        <td>{{ employee.father_name }}</td>
+      </tr>
     {% endfor %}
   </tbody>
 </table>
@@ -30,7 +28,9 @@
   let employeesTableBody = document.querySelector(".employees-table > tbody");
 
   employeesTableBody.addEventListener("click", function(event) {
-    window.location.href += event.target.closest("tr").dataset.href;
+    let tr = event.target.closest("tr");
+
+    if (tr) window.location.href += tr.dataset.href;
   });
 </script>
 {% endblock %}

@@ -19,7 +19,6 @@
       </li>
     </ul>
   </div>
-
   <header>
     <div class="container">
       <div class="row header-row">
@@ -27,21 +26,19 @@
       </div>
     </div>
   </header>
-
   <main>
     <div  class="container">
-    {% block main %}{% endblock %}
+      {% block main %}{% endblock %}
     </div>
   </main>
-    
   <script type="text/javascript">
     "use strict";
 
-    let anchors = document.querySelectorAll(".sidebar a");
+    let links = document.querySelectorAll(".sidebar .link");
 
-    for (let a of anchors) {
-      if (a.href == window.location.href) {
-        a.parentElement.classList.add("selected-link");
+    for (let link of links) {
+      if (link.href == window.location.href) {
+        link.parentElement.classList.add("selected-link");
         break;
       }
     }

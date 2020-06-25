@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
 from . import forms
@@ -54,18 +54,18 @@ class AddEmployee(TemplateView):
         old_work_place_form = forms.OldWorkPlaceForm(request.POST)
 
         if old_work_place_form.is_valid():
-            employee_id = models.OldWorkPlace.objects.create(
-                company_name=request.POST['company_name'],
-                position=request.POST['position'],
-                started=request.POST['started'],
-                finished=request.POST['finished'],
-                cause=request.POST['cause'],
+            models.OldWorkPlace.objects.create(
+                company_name=old_work_place_form.cleaned_data['company_name'],
+                position=old_work_place_form.cleaned_data['position'],
+                started_work=old_work_place_form.cleaned_data['started_work'],
+                finished_work=old_work_place_form.cleaned_data['finished_work'],
+                reason_of_leave=old_work_place_form.cleaned_data['reason_of_leave'],
                 employee=employee
-            ).employee.id
+            )
 
             return self.render_to_response({
                 'old_work_place_form': self.old_work_place_form,
-                'employee_id': employee_id
+                'employee_id': employee.id
             })
 
         return self.render_to_response({

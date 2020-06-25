@@ -1,5 +1,14 @@
 {% extends "hr/base.html" %}
-
+{% load i18n static %}
 {% block title %}{{ employee }}{% endblock %}
 {% block main %}
+<div class="row">
+  <div class="col-lg-3">
+    {% if employee.photo %}
+      <img class="photo photo-size" src="{{ employee.photo.url }}" alt="employee photo">
+    {% else %}
+      <img class="photo" src="{% static "/hr/img/default_photo.jpg" %}" alt="employee photo">
+    {% endif %}
+  </div>
+</div>
 {% endblock %}
