@@ -55,3 +55,50 @@ class OldWorkPlace(models.Model):
         verbose_name = 'Köhnə iş yeri'
         verbose_name_plural = 'Köhnə iş yerləri'
         db_table = 'hr_old_work_place'
+
+
+class Company(models.Model):
+    name = models.CharField('Şirkətin adı', max_length=255, unique=True)
+
+    class Meta:
+        verbose_name = 'Şirkət'
+        verbose_name_plural = 'Şirkətlər'
+
+    def __str__(self):
+        return self.name
+
+
+class Department(models.Model):
+    name = models.CharField('Şöbə', max_length=50, unique=True)
+    company = models.ManyToManyField(Company, verbose_name='Şirkətlər')
+
+    class Meta:
+        verbose_name = 'Şöbə'
+        verbose_name_plural = 'Şöbələr'
+
+    def __str__(self):
+        return self.name
+
+
+class Branch(models.Model):
+    name = models.CharField('Filialın adı', max_length=50)
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL, verbose_name='Şirkətin adı', null=True)
+
+    class Meta:
+        verbose_name = 'Filial'
+        verbose_name_plural = 'Filiallar'
+
+    def __str__(self):
+        return self.name
+
+
+class Position(models.Model):
+    name = models.CharField('İxtisas', max_length=50, unique=True)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, verbose_name='Şöbə', blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'İxtisas'
+        verbose_name_plural = 'İxtisaslar'
+
+    def __str__(self):
+        return self.name
