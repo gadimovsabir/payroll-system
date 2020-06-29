@@ -102,3 +102,18 @@ class Position(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CurrentJob(models.Model):
+    employee = models.OneToOneField(Employee, on_delete=models.CASCADE, verbose_name='İşçi')
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL, verbose_name='Şirkət', null=True)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, verbose_name='Şöbə', blank=True, null=True)
+    position = models.ForeignKey(Position, on_delete=models.SET_NULL, verbose_name='İxtisas', null=True)
+    branch = models.ForeignKey(Branch, on_delete=models.SET_NULL, verbose_name='Filial', blank=True, null=True)
+    started_work = models.DateField('İşə başladığı tarix')
+    salary = models.IntegerField('Aylıq əmək haqqı')
+
+    class Meta:
+        verbose_name = 'Hazırki iş yeri'
+        verbose_name_plural = 'Hazırki iş yerləri'
+        db_table = 'hr_current_job'
