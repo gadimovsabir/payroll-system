@@ -39,3 +39,22 @@ class OldWorkPlaceForm(forms.ModelForm):
         widgets = {
             'employee': forms.HiddenInput
         }
+
+
+class CurrentJobForm(forms.ModelForm):
+    class Meta:
+        model = models.CurrentJob
+        fields = [
+            'company',
+            'department',
+            'position',
+            'branch',
+            'started_work',
+            'salary',
+            'employee'
+        ]
+
+        widgets = {
+            'employee': forms.HiddenInput
+        }
+    
