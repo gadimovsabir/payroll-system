@@ -8,6 +8,11 @@
       <th>Adı</th>
       <th>Soyadı</th>
       <th>Ata adı</th>
+      <th>Yaşı</th>
+      <th>Şirkəti</th>
+      <th>Şöbəsi</th>
+      <th>İxtisası</th>
+      <th>Filialı</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +21,11 @@
         <td>{{ employee.first_name }}</td>
         <td>{{ employee.last_name }}</td>
         <td>{{ employee.father_name }}</td>
+        <td>{{ employee.get_age }}</td>
+        <td>{{ employee.currentjob.company.name }}</td>
+        <td>{{ employee.currentjob.department.name }}</td>
+        <td>{{ employee.currentjob.position.name }}</td>
+        <td>{{ employee.currentjob.branch.name }}</td>
       </tr>
     {% endfor %}
   </tbody>
@@ -25,12 +35,26 @@
 <script type="text/javascript">
   "use strict";
 
-  let employeesTableBody = document.querySelector(".employees-table > tbody");
+  let employeesTable = document.querySelector(".employees-table");
+  let index;
 
-  employeesTableBody.addEventListener("click", function(event) {
-    let tr = event.target.closest("tr");
+  employeesTable.addEventListener("click", function(event) {
+    let target = event.target.closest("[data-href]") || event.target.closest("th");
+    
+    if (!target) {
+      return;
+    } else if (target.nodeName == "TR") {
+      window.location += target.dataset.href;
+    } else if (target.nodeName == "TH" && index != target.cellIndex) {
+      let rows = Array.from(employeesTable.tBodies[0].rows);
+      index = target.cellIndex;
 
-    if (tr) window.location.href += tr.dataset.href;
+      rows.sort(function(tr1, tr2) {
+        return tr1.cells[index].textContent.localeCompare(tr2.cells[index].textContent, "az");
+      });
+
+      employeesTable.tBodies[0].append(...rows);
+    }
   });
 </script>
 {% endblock %}

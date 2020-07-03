@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 # Create your models here.
 
@@ -41,6 +42,11 @@ class Employee(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+    def get_age(self):
+        today = date.today()
+        difference = today.year - self.date_of_birth.year
+        return difference - ((today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))
 
 
 class OldWorkPlace(models.Model):

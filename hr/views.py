@@ -13,7 +13,11 @@ class Index(TemplateView):
     template_name = 'hr/index.html'
 
     def get(self, request, *args, **kwargs):
-        employees = models.Employee.objects.all()
+        employees = models.Employee.objects.raw("""SELECT * FROM hr_employee
+    LEFT JOIN hr_current_job ON hr_employee.id = hr_current_job.employee_id
+    LEFT JOIN hr_position ON hr_current_job.position_id = hr_position.id
+    LEFT JOIN hr_company ON hr_current_job.company_id = hr_company.id;""")
+
         return self.render_to_response({'employees': employees})
 
 
