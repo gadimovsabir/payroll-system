@@ -6,9 +6,9 @@
   {% csrf_token %}
   {% if employee_form %}
     {% for field in employee_form %}
-      <div class="form-row">
-        {{ field.label_tag }} {{ field }}
-        {{ field.errors }}
+      <div class="form-row row">
+        <div class="col-lg-3 label-div">{{ field.label_tag }}</div>
+        <div class="col-lg-9">{{ field }} {{ field.errors }}</div>
       </div>
     {% endfor %}
     <div class="submit-row">
@@ -17,9 +17,9 @@
   {% elif old_work_place_form %}
     <input type="hidden" name="employee" value="{{ employee_id }}">
     {% for field in old_work_place_form.visible_fields %}
-      <div class="form-row">
-        {{ field.label_tag }} {{ field }}
-        {{ field.errors }}
+      <div class="form-row row">
+        <div class="col-lg-3 label-div">{{ field.label_tag }}</div>
+        <div class="col-lg-9">{{ field }} {{ field.errors }}</div>
       </div>
     {% endfor %}
     <div class="submit-row">
@@ -30,9 +30,9 @@
   {% elif current_job_form %}
     <input type="hidden" name="employee" value="{{ employee_id }}">
     {% for field in current_job_form.visible_fields %}
-      <div class="form-row">
-        {{ field.label_tag }} {{ field }}
-        {{ field.errors }}
+      <div class="form-row row">
+        <div class="col-lg-3 label-div">{{ field.label_tag }}</div>
+        <div class="col-lg-9">{{ field }} {{ field.errors }}</div>
       </div>
     {% endfor %}
     <div class="submit-row">
@@ -40,4 +40,7 @@
     </div>
   {% endif %}
 </form>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{% static "hr/js/forms.js" %}"></script>
 {% endblock %}

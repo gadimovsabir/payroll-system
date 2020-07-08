@@ -130,27 +130,43 @@ th, td {
 /* FORMS */
 
 .form-row {
-  padding: 5px 0;
-}
-
-.form-row label {
-  display: block;
+  padding: 6px 0;
 }
 
 form input, form select {
-  padding: 6px 12px;
+  padding: 8px 12px;
   border-radius: 4px;
 }
 
-.errorlist li {
+form input[type="file"] {
+  padding: 0;
+  min-width: auto;
+}
+
+.form-row input {
+  min-width: 400px;
+}
+
+.label-div {
+  text-align: right;
+  padding-right: 30px;
+}
+
+.errorlist {
   list-style: none;
   color: red;
+}
+
+.submit-row {
+  padding-top: 42px;
+  text-align: right;
+  padding-right: 10%;
 }
 
 .submit-row input {
   background-color: rgb(0, 123, 255);
   color: rgb(255, 255, 255);
-  border: 1px solid rgb(0, 123, 255);
+  border: none;
   font-size: 16px;
   font-family: "Roboto", sans-serif;
 }
@@ -165,4 +181,8 @@ form input, form select {
 
 .col-lg-3 {
   width: 25%;
+}
+
+.col-lg-9 {
+  width: 75%;
 }

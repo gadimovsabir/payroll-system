@@ -23,6 +23,10 @@ class EmployeeForm(forms.ModelForm):
             'photo'
         ]
 
+        widgets = {
+            'date_of_birth': forms.DateInput(attrs={'class': 'date-field'})
+        }
+
 
 class OldWorkPlaceForm(forms.ModelForm):
     class Meta:
@@ -37,7 +41,9 @@ class OldWorkPlaceForm(forms.ModelForm):
         ]
 
         widgets = {
-            'employee': forms.HiddenInput
+            'employee': forms.HiddenInput,
+            'started_work': forms.DateInput(attrs={'class': 'date-field'}),
+            'finished_work': forms.DateInput(attrs={'class': 'date-field'})
         }
 
 
@@ -55,6 +61,6 @@ class CurrentJobForm(forms.ModelForm):
         ]
 
         widgets = {
-            'employee': forms.HiddenInput
+            'employee': forms.HiddenInput,
+            'started_work': forms.DateInput(attrs={'class': 'date-field'})
         }
-    
