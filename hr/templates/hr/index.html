@@ -44,7 +44,7 @@
     if (!target) {
       return;
     } else if (target.nodeName == "TR") {
-      window.location += target.dataset.href;
+      window.location += target.dataset.href + '/';
     } else if (target.nodeName == "TH" && index != target.cellIndex) {
       let rows = Array.from(employeesTable.tBodies[0].rows);
       index = target.cellIndex;
