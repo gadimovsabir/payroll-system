@@ -19,6 +19,12 @@ EDUCATION_CHOICES = (
     ('Y', 'Yoxdur'),
 )
 
+VACATION_TYPE_CHOICES = (
+    ('1type', 'Əmək məzuniyyəti'),
+    ('2type', 'Sosisal məzuniyyət'),
+    ('3type', 'Ödənişsiz məzuniyyət')
+)
+
 
 class Employee(models.Model):
     first_name = models.CharField('Adı', max_length=30)
@@ -118,8 +124,20 @@ class CurrentJob(models.Model):
     branch = models.ForeignKey(Branch, on_delete=models.SET_NULL, verbose_name='Filial', blank=True, null=True)
     started_work = models.DateField('İşə başladığı tarix')
     salary = models.IntegerField('Aylıq əmək haqqı')
+    count_since = models.DateField(null=True)
 
     class Meta:
         verbose_name = 'Hazırki iş yeri'
         verbose_name_plural = 'Hazırki iş yerləri'
         db_table = 'hr_current_job'
+
+
+class Vacation(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name='İşçi')
+    start_of_vacation = models.DateField('Məzuniyyətin ilk günü')
+    end_of_vacation = models.DateField('Məzuniyyətin bitdiyi gün')
+    type_of_vacation = models.CharField('Məzuniyyətin növü', max_length=5, choices=VACATION_TYPE_CHOICES)
+
+    class Meta:
+        verbose_name = 'Məzuniyyət'
+        verbose_name_plural = 'Məzuniyyətlər'
