@@ -1,0 +1,17 @@
+{% extends "hr/base.html" %}
+{% load i18n static %}
+{% block title %}İşçini işdən çıxarmaq{% endblock %}
+{% block main %}
+<div class="confirmation-container">
+  <p>{{ employee }} adda işçi işden azad edilsin?</p>
+  <p>
+    <img src="{% static "hr/img/icon-alert.svg" %}" alt="DİQQƏT!">
+    İşçi işdən azad edilsə onun bütün məlumatları sistemden silinəcək.
+  </p>
+  <form method="post">
+    {% csrf_token %}
+    <input class="delete-button" type="submit" value="İşdən azad et">
+    <a class="cancle-button" href="/hr/{{ employee.id }}/">Xeyr geri dön</a>
+  </form>
+</div>
+{% endblock %}

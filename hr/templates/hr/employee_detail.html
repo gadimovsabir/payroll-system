@@ -9,6 +9,12 @@
     {% else %}
       <img class="photo" src="{% static "/hr/img/default_photo.jpg" %}" alt="employee photo">
     {% endif %}
+    <div class="actions">
+      <h4>Əməliyyatlar</h4>
+      <ul>
+        <li><a class="dismiss-employee-icon" href="delete/">İşdən azad et</a></li>
+      </ul>
+    </div>
   </div>
 </div>
 {% endblock %}

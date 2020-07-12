@@ -10,35 +10,23 @@
 <body>
   <div class="sidebar">
     <h2>Payroll system</h2>
-    <ul>
-      <li>
-        <a class="link employees-icon" href="{% url "hr:index" %}">İşçilər</a>
-      </li>
-      <li>
-        <a class="link add-employee-icon" href="{% url "hr:add_employee" %}">Qeydiyyat</a>
-      </li>
-    </ul>
+    <a class="link employees-icon" href="{% url "hr:index" %}">İşçilər</a>
+    <a class="link add-employee-icon" href="{% url "hr:add_employee" %}">Qeydiyyat</a>
   </div>
-  <header>
-    <div class="container">
-      <div class="row header-row">
-        <a class="logout" href="#">ÇIX</a>
-      </div>
-    </div>
+  <header class="container">
+    <a class="logout" href="#">ÇIX</a>
   </header>
-  <main>
-    <div  class="container">
-      {% block main %}{% endblock %}
-    </div>
+  <main class="container">
+    {% block main %}{% endblock %}
   </main>
   <script type="text/javascript">
     "use strict";
 
-    let links = document.querySelectorAll(".sidebar .link");
+    let links = document.querySelectorAll(".link");
 
     for (let link of links) {
       if (link.href == window.location.href) {
-        link.parentElement.classList.add("selected-link");
+        link.classList.add("selected-link");
         break;
       }
     }

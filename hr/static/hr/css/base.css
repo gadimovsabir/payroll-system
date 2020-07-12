@@ -10,37 +10,39 @@ body {
 }
 
 a {
-  color: rgb(0, 0, 0);
+  color: #000;
   text-decoration: none;
 }
 
 /* SIDEBAR */
 
 .sidebar {
-  width: 180px;
+  width: 200px;
   position: fixed;
   height: 100%;
   border-right: solid 2px rgb(241, 243, 245);
-  background-color: rgb(255, 255, 255);
+  background-color: #fff;
 }
 
 .sidebar h2 {
-  padding: 15px;
-  font-size: 1.4em;
-}
-
-.sidebar li {
-  padding: 10px;
+  padding: 10px 15px;
 }
 
 .link {
   font-weight: 700;
   position: relative;
-  margin-left: 38px;
+  display: block;
+  padding: 10px 0 10px 50px;
+}
+
+.link:hover {
+  background-color: rgb(241, 243, 245);
 }
 
 .selected-link {
   background-color: rgb(241, 243, 245);
+  border: solid 1px rgb(222, 226, 230);
+  border-right: none;
 }
 
 .link::before {
@@ -48,7 +50,7 @@ a {
   width: 24px;
   height: 24px;
   position: absolute;
-  left: -35px;
+  left: 10px;
 }
 
 .employees-icon::before {
@@ -62,12 +64,13 @@ a {
 /* MAIN */
 
 header {
-  border-bottom: solid 2px rgb(241, 243, 245);
+  box-shadow: 0 0px 6px rgb(150, 150, 150);
+  text-align: right;
 }
 
 .container {
   width: 100%;
-  padding: 15px 15px 15px 197px;
+  padding: 15px 15px 15px 217px;
   box-sizing: border-box;
 }
 
@@ -75,12 +78,8 @@ header {
   display: flex;
 }
 
-.header-row {
-  justify-content: flex-end;
-}
-
 .logout {
-  margin-right: 25px;
+  padding-right: 25px;
   position: relative;
 }
 
@@ -91,21 +90,64 @@ header {
   height: 16px;
   position: absolute;
   top: 1px;
-  left: 30px;
+  right: 4  px;
 }
+
+/* EMPLOYEE PROFILE */
 
 .photo {
   display: block;
   margin: auto;
-  padding: 3px;
-  border: solid 1px rgb(241, 243, 245);
-  box-shadow: 2px 2px 3px #dadce0,
-    -2px -2px 3px #dadce0;
 }
 
 .photo-size {
   width: 200px;
   height: 266px;
+}
+
+.actions {
+  margin: 20px auto 0;
+  width: 180px;
+  border: solid 2px rgb(222, 226, 230);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.actions h4 {
+  color: rgb(75, 75, 75);
+  padding: 5px 10px 10px;
+}
+
+.actions li {
+  list-style: none;
+  padding: 10px 0 0;
+}
+
+.actions li:hover {
+  background-color: rgb(241, 243, 245);
+  border-radius: 5px;
+}
+
+.actions a {
+  padding-left: 30px;
+  position: relative;
+}
+
+.actions a::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 3px;
+  top: 3px;
+}
+
+.dismiss-employee-icon::before {
+  background: no-repeat url(../img/dismiss-employee-icon.svg);
+}
+
+.confirmation-container p {
+  padding: 10px 0;
 }
 
 /* TABLES */
@@ -119,7 +161,7 @@ th, td {
   padding: 7px;
 }
 
-.employees-table  tbody tr:hover, .employees-table th:hover {
+.employees-table tbody tr:hover, .employees-table th:hover {
   cursor: pointer;
   box-shadow: inset 1px 0 0 #dadce0,
     inset -1px 0 0 #dadce0,
@@ -129,10 +171,6 @@ th, td {
 
 /* FORMS */
 
-.form-row {
-  padding: 6px 0;
-}
-
 form input, form select {
   padding: 8px 12px;
   border-radius: 4px;
@@ -141,10 +179,23 @@ form input, form select {
 form input[type="file"] {
   padding: 0;
   min-width: auto;
+  border: none;
+}
+
+form input[type="submit"] {
+  border: none;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+}
+
+.form-row {
+  padding: 6px 0;
 }
 
 .form-row input {
   min-width: 400px;
+  border: solid 1px rgb(118, 118, 118);
 }
 
 .label-div {
@@ -166,15 +217,23 @@ form input[type="file"] {
 .submit-row input {
   background-color: rgb(0, 123, 255);
   color: rgb(255, 255, 255);
-  border: none;
-  font-size: 16px;
-  font-family: "Roboto", sans-serif;
 }
 
 .submit-row input:hover {
   background-color: #0069d9;
-  cursor: pointer;
   transition: background-color .15s ease-in-out;
+}
+
+.delete-button {
+  background-color: #ba2121;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.cancle-button {
+  background-color: #ddd;
+  padding: 8px 12px;
+  border-radius: 4px;
 }
 
 /* COLUMNS */
@@ -185,4 +244,8 @@ form input[type="file"] {
 
 .col-lg-9 {
   width: 75%;
+}
+
+.col-lg-6 {
+  width: 50%;  
 }

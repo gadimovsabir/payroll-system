@@ -146,3 +146,18 @@ class EmployeeDetail(TemplateView):
     def get(self, request, pk, *args, **kwargs):
         employee = get_object_or_404(models.Employee, pk=pk)
         return self.render_to_response({'employee': employee})
+
+
+class DeleteEmployee(TemplateView):
+    template_name = 'hr/delete_confirmation.html'
+
+    def get(self, request, pk, *args, **kwargs):
+        employee = get_object_or_404(models.Employee, pk=pk)
+        return self.render_to_response({'employee': employee})
+
+    def post(self, request, pk, *args, **kwargs):
+        try:
+            employee = models.Employee.objects.get(pk=pk)
+            employee.delete()
+        finally:
+            return HttpResponseRedirect(reverse('hr:index'))
