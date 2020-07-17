@@ -146,6 +146,10 @@ header {
   background: no-repeat url(../img/dismiss-employee-icon.svg);
 }
 
+.change-icon::before {
+  background: no-repeat url(../img/change-icon.svg);
+}
+
 .confirmation-container p {
   padding: 10px 0;
 }
@@ -176,6 +180,11 @@ form input, form select {
   border-radius: 4px;
 }
 
+.form-row input {
+  min-width: 400px;
+  border: solid 1px rgb(118, 118, 118);
+}
+
 form input[type="file"] {
   padding: 0;
   min-width: auto;
@@ -189,13 +198,12 @@ form input[type="submit"] {
   cursor: pointer;
 }
 
-.form-row {
-  padding: 6px 0;
+form input[type="checkbox"] {
+  min-width: auto;
 }
 
-.form-row input {
-  min-width: 400px;
-  border: solid 1px rgb(118, 118, 118);
+.form-row {
+  padding: 6px 0;
 }
 
 .label-div {

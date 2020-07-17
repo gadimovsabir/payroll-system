@@ -161,3 +161,23 @@ class DeleteEmployee(TemplateView):
             employee.delete()
         finally:
             return HttpResponseRedirect(reverse('hr:index'))
+
+
+class ChangeEmployee(TemplateView):
+    template_name = 'hr/change_employee.html'
+
+    def get(self, request, pk, *args, **kwargs):
+        employee = get_object_or_404(models.Employee, pk=pk)
+        return self.render_to_response({
+            'employee_form': forms.EmployeeForm(instance=employee)
+            })
+    
+    def post(self, request, pk, *args, **kwargs):
+        employee = get_object_or_404(models.Employee, pk=pk)
+        employee_form = forms.EmployeeForm(request.POST, request.FILES, instance=employee)
+
+        if employee_form.is_valid():
+            employee_form.save()
+            return HttpResponseRedirect(f'/hr/{pk}/')
+
+        return self.render_to_response({'employee_form': employee_form})
