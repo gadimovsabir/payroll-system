@@ -1,0 +1,20 @@
+{% extends "hr/base.html" %}
+{% load i18n static %}
+{% block title %}İşçin məlumatlarını redaktə et{% endblock %}
+{% block main %}
+<form method="POST">
+  {% csrf_token %}
+  {% for field in employee_form %}
+    <div class="form-row row">
+      <div class="col-lg-3 label-div">{{ field.label_tag }}</div>
+      <div class="col-lg-9">{{ field }} {{ field.errors }}</div>
+    </div>
+  {% endfor %}
+  <div class="submit-row">
+    <input type="submit" value="Redaktə et">
+  </div>
+</form>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{% static "hr/js/forms.js" %}"></script>
+{% endblock %}

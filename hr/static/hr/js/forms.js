@@ -1,22 +1,6 @@
 "use strict";
 
 let HTMLText = `<select>
-</select>
-<select>
-  <option value="01">Yanvar</option>
-  <option value="02">Fevral</option>
-  <option value="03">Mart</option>
-  <option value="04">Aprel</option>
-  <option value="05">May</option>
-  <option value="06">İyun</option>
-  <option value="07">İyul</option>
-  <option value="08">Avqust</option>
-  <option value="09">Sentyabr</option>
-  <option value="10">Oktyabr</option>
-  <option value="11">Noyabr</option>
-  <option value="12">Dekabr</option>
-</select>
-<select>
   <option value="01">1</option>
   <option value="02">2</option>
   <option value="03">3</option>
@@ -48,7 +32,22 @@ let HTMLText = `<select>
   <option value="29">29</option>
   <option value="30">30</option>
   <option value="31">31</option>
-</select>`
+</select>
+<select>
+  <option value="01">Yanvar</option>
+  <option value="02">Fevral</option>
+  <option value="03">Mart</option>
+  <option value="04">Aprel</option>
+  <option value="05">May</option>
+  <option value="06">İyun</option>
+  <option value="07">İyul</option>
+  <option value="08">Avqust</option>
+  <option value="09">Sentyabr</option>
+  <option value="10">Oktyabr</option>
+  <option value="11">Noyabr</option>
+  <option value="12">Dekabr</option>
+</select>
+<select></select>`
 
 let dateFields = document.querySelectorAll(".date-field");
 let date = new Date();
@@ -57,7 +56,7 @@ for (let field of dateFields) {
   field.hidden = true;
   let parentField = field.parentElement;
   parentField.insertAdjacentHTML("afterbegin", HTMLText);
-  let [selectYear, selectMonth, selectDay] = parentField.children;
+  let [selectDay, selectMonth, selectYear] = parentField.children;
 
   for (let year = 0; year < 100; year++) {
     let option = document.createElement("option");
@@ -67,14 +66,14 @@ for (let field of dateFields) {
   }
 
   if (field.value) {
-    selectYear.value = field.value.slice(0, 4);
-    selectMonth.value = field.value.slice(5, 7);
-    selectDay.value = field.value.slice(8);
+    selectDay.value = field.value.slice(0, 2);
+    selectMonth.value = field.value.slice(3, 5);
+    selectYear.value = field.value.slice(6);  
   } else {
-    field.value = date.getFullYear() + "-01-01";
+    field.value = "1.1." + date.getFullYear();
   }
 
   parentField.onchange = function() {
-    field.value = `${selectYear.value}-${selectMonth.value}-${selectDay.value}`;
+    field.value = `${selectDay.value}.${selectMonth.value}.${selectYear.value}`;
   }
 }
