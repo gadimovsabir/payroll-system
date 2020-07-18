@@ -90,7 +90,7 @@ header {
   height: 16px;
   position: absolute;
   top: 1px;
-  right: 4  px;
+  right: 4px;
 }
 
 /* EMPLOYEE PROFILE */
@@ -120,7 +120,7 @@ header {
 
 .actions li {
   list-style: none;
-  padding: 10px 0 0;
+  padding: 5px 0;
 }
 
 .actions li:hover {
@@ -144,6 +144,30 @@ header {
 
 .dismiss-employee-icon::before {
   background: no-repeat url(../img/dismiss-employee-icon.svg);
+}
+
+.send-vacation-icon::before {
+  background: no-repeat url(../img/send-vacation-icon.svg);
+}
+
+.modal-window-background {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.modal-window {
+  width: 30%;
+  margin: 15% auto 0;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 15px;
 }
 
 .confirmation-container p {
@@ -176,6 +200,15 @@ form input, form select {
   border-radius: 4px;
 }
 
+.form-row {
+  padding: 6px 0;
+}
+
+.form-row input {
+  min-width: 400px;
+  border: solid 1px rgb(118, 118, 118);
+}
+
 form input[type="file"] {
   padding: 0;
   min-width: auto;
@@ -189,14 +222,6 @@ form input[type="submit"] {
   cursor: pointer;
 }
 
-.form-row {
-  padding: 6px 0;
-}
-
-.form-row input {
-  min-width: 400px;
-  border: solid 1px rgb(118, 118, 118);
-}
 
 .label-div {
   text-align: right;
@@ -214,12 +239,12 @@ form input[type="submit"] {
   padding-right: 10%;
 }
 
-.submit-row input {
+.blue-btn {
   background-color: rgb(0, 123, 255);
   color: rgb(255, 255, 255);
 }
 
-.submit-row input:hover {
+.blue-btn:hover {
   background-color: #0069d9;
   transition: background-color .15s ease-in-out;
 }
@@ -227,10 +252,9 @@ form input[type="submit"] {
 .delete-button {
   background-color: #ba2121;
   color: #fff;
-  margin-right: 10px;
 }
 
-.cancle-button {
+.cancle-btn {
   background-color: #ddd;
   padding: 8px 12px;
   border-radius: 4px;

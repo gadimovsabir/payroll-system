@@ -1,5 +1,6 @@
 from django import forms
 from django.core.validators import RegexValidator
+from datetime import date
 
 from . import models
 
@@ -151,3 +152,27 @@ class CurrentJobForm(forms.ModelForm):
             'employee': forms.HiddenInput,
             'started_work': forms.DateInput(attrs={'class': 'date-field'})
         }
+
+
+class VacationForm(forms.ModelForm):
+    class Meta:
+        model = models.Vacation
+        fields = (
+            'employee',
+            'start_of_vacation',
+            'end_of_vacation',
+            'type_of_vacation'
+        )
+
+        widgets = {
+            'employee': forms.HiddenInput()
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        today = date.today()
+        start_of_vacation = cleaned_data['start_of_vacation']
+        end_of_vacation = cleaned_data['end_of_vacation']
+
+        if start_of_vacation < today or end_of_vacation <= start_of_vacation:
+            raise forms.ValidationError('Tarixləri düzgün qeyd edin.')

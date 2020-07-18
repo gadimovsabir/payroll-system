@@ -11,7 +11,7 @@
   <form method="post">
     {% csrf_token %}
     <input class="delete-button" type="submit" value="İşdən azad et">
-    <a class="cancle-button" href="/hr/{{ employee.id }}/">Xeyr geri dön</a>
+    <a class="cancle-btn" href="/hr/{{ employee.id }}/">Xeyr geri dön</a>
   </form>
 </div>
 {% endblock %}

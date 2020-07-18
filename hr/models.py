@@ -136,7 +136,12 @@ class Vacation(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name='İşçi')
     start_of_vacation = models.DateField('Məzuniyyətin ilk günü')
     end_of_vacation = models.DateField('Məzuniyyətin bitdiyi gün')
-    type_of_vacation = models.CharField('Məzuniyyətin növü', max_length=5, choices=VACATION_TYPE_CHOICES)
+    type_of_vacation = models.CharField(
+        'Məzuniyyətin növü',
+        max_length=5,
+        choices=VACATION_TYPE_CHOICES,
+        default='1type'
+    )
 
     class Meta:
         verbose_name = 'Məzuniyyət'

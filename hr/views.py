@@ -145,7 +145,34 @@ class EmployeeDetail(TemplateView):
 
     def get(self, request, pk, *args, **kwargs):
         employee = get_object_or_404(models.Employee, pk=pk)
-        return self.render_to_response({'employee': employee})
+        context = {'employee': employee}
+
+        if request.GET.get('form') == 'vacation_form':
+            context['form'] = forms.VacationForm()
+
+        return self.render_to_response(context)
+
+    def post(self, request, *args, **post):
+        vacation_form = forms.VacationForm(request.POST)
+
+        try:
+            employee = models.Employee.objects.get(pk=request.POST['employee'])
+            current_job = models.CurrentJob.objects.get(employee_id=employee.id)
+        except (KeyError, models.Employee.DoesNotExist):
+            return HttpResponseRedirect(reverse('hr:index'))
+        except models.CurrentJob.DoesNotExist:
+            vacation_form.add_error(None, 'İşçi iş yerinə təyin edilməyib.')
+
+        if vacation_form.is_valid():
+            vacation_form.save()
+            current_job.count_since = vacation_form.cleaned_data['end_of_vacation']
+            current_job.save()
+            return self.render_to_response({'employee': employee})
+
+        return self.render_to_response({
+            'employee': employee,
+            'form': vacation_form
+        })
 
 
 class DeleteEmployee(TemplateView):

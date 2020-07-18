@@ -2,6 +2,27 @@
 {% load i18n static %}
 {% block title %}{{ employee }}{% endblock %}
 {% block main %}
+{% if form %}
+  <div class="modal-window-background">
+    <div class="modal-window">
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <input type="hidden" name="employee" value="{{ employee.id }}">
+        {% for field in form.visible_fields %}
+          <div>
+            <div>{{ field.label_tag }}</div>
+            <div>{{ field }} {{ field.errors }}</div>
+          </div>
+        {% endfor %}
+        <div class="submit-row">
+          <a class="cancle-btn" href="/hr/{{ employee.id }}/">Geri dön</a>
+          <input class="blue-btn" type="submit" value="Göndər">
+        </div>
+      </form>
+    </div>
+  </div>
+{% endif %}
 <div class="row">
   <div class="col-lg-3">
     {% if employee.photo %}
@@ -12,6 +33,7 @@
     <div class="actions">
       <h4>Əməliyyatlar</h4>
       <ul>
+        <li><a class="send-vacation-icon" href="?form=vacation_form">Məzuniyyətə göndər</a></li>
         <li><a class="dismiss-employee-icon" href="delete/">İşdən azad et</a></li>
       </ul>
     </div>

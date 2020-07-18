@@ -12,7 +12,7 @@
       </div>
     {% endfor %}
     <div class="submit-row">
-      <input type="submit" name="_add_employee" value="Göndər">
+      <input class="blue-btn" type="submit" name="_add_employee" value="Göndər">
     </div>
   {% elif old_work_place_form %}
     <input type="hidden" name="employee" value="{{ employee_id }}">
@@ -23,9 +23,9 @@
       </div>
     {% endfor %}
     <div class="submit-row">
-      <input type="submit" name="_add_another" value="Yadda saxla və yenisini əlavə et">
-      <input type="submit" name="_add_and_pass" value="Yadda saxla">
-      <input type="submit" name="_pass" value="Keç">
+      <input class="blue-btn" type="submit" name="_add_another" value="Yadda saxla və yenisini əlavə et">
+      <input class="blue-btn" type="submit" name="_add_and_pass" value="Yadda saxla">
+      <input class="blue-btn" type="submit" name="_pass" value="Keç">
     </div>
   {% elif current_job_form %}
     <input type="hidden" name="employee" value="{{ employee_id }}">
@@ -36,7 +36,7 @@
       </div>
     {% endfor %}
     <div class="submit-row">
-      <input type="submit" name="_set_work_place" value="Göndər">
+      <input class="blue-btn" type="submit" name="_set_work_place" value="Göndər">
     </div>
   {% endif %}
 </form>
