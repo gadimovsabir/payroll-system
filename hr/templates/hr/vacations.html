@@ -1,0 +1,24 @@
+{% extends 'hr/base.html' %}
+{% block title %}Məzuniyyətlər{% endblock %}
+{% block main %}
+<table>
+  <thead>
+    <tr>
+      <th>İşçi</th>
+      <th>Məzuniyyətin ilk günü</th>
+      <th>Məzuniyyətin son günü</th>
+      <th>Məzuniyyətin növü</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for vacation in vacations %}
+      <tr>
+        <td>{{ vacation.employee }}</td>
+        <td>{{ vacation.start_of_vacation }}</td>
+        <td>{{ vacation.end_of_vacation }}</td>
+        <td>{{ vacation.get_type_of_vacation_display }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

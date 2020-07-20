@@ -208,3 +208,11 @@ class ChangeEmployee(TemplateView):
             return HttpResponseRedirect(f'/hr/{pk}/')
 
         return self.render_to_response({'employee_form': employee_form})
+
+
+class Vacations(TemplateView):
+    template_name = 'hr/vacations.html'
+
+    def get(self, request, *args, **kwargs):
+        vacations = models.Vacation.objects.all()
+        return self.render_to_response({'vacations': vacations})

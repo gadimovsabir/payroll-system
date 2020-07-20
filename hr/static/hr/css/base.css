@@ -61,6 +61,10 @@ a {
   background: no-repeat url(../img/add-employee-icon.svg);
 }
 
+.vacations-icon::before {
+  background: no-repeat url(../img/vacations-icon.svg);
+}
+
 /* MAIN */
 
 header {
