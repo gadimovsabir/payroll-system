@@ -25,6 +25,11 @@ VACATION_TYPE_CHOICES = (
     ('3type', 'Ödənişsiz məzuniyyət')
 )
 
+REASON_OF_ABSENT_CHOICES = (
+    ('1', 'Üzürlü səbəb'),
+    ('2', 'Üzürsüz səbəb')
+)
+
 
 class Employee(models.Model):
     first_name = models.CharField('Adı', max_length=30)
@@ -125,6 +130,7 @@ class CurrentJob(models.Model):
     started_work = models.DateField('İşə başladığı tarix')
     salary = models.IntegerField('Aylıq əmək haqqı')
     count_since = models.DateField(null=True)
+    pros_and_cons = models.IntegerField(default=0)
 
     class Meta:
         verbose_name = 'Hazırki iş yeri'
@@ -140,9 +146,15 @@ class Vacation(models.Model):
         'Məzuniyyətin növü',
         max_length=5,
         choices=VACATION_TYPE_CHOICES,
-        default='1type'
+        default='1type',
     )
 
     class Meta:
         verbose_name = 'Məzuniyyət'
         verbose_name_plural = 'Məzuniyyətlər'
+
+
+class Absent(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name='İşçi')
+    date_of_absence = models.DateField('İşə gəlmədiyi gün')
+    reason_of_absence = models.CharField('İşə gəlməmə səbəbi', max_length=1, choices=REASON_OF_ABSENT_CHOICES)
