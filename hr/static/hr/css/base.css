@@ -201,6 +201,39 @@ th, td {
     0 1px 3px 1px rgba(60,64,67,.15);
 }
 
+.calendar-container {
+  position: absolute;
+  z-index: 2;
+  background-color: #fff;
+  font-size: 11px;
+  border: solid 1px #000;
+  border-radius: 4px;
+  width: 152px;
+  padding: 0 10px;
+}
+
+.calendar-table th, .calendar-table td {
+  padding: 4px;
+  border: none;
+}
+
+.calendar-table td:hover {
+  cursor: pointer;
+  background-color: rgb(0, 123, 255);
+  color: #fff;
+}
+
+.calendar-head {
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.arrows {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
 /* FORMS */
 
 form input, form select {

@@ -165,7 +165,15 @@ class VacationForm(forms.ModelForm):
         )
 
         widgets = {
-            'employee': forms.HiddenInput()
+            'employee': forms.HiddenInput(),
+            'start_of_vacation': forms.DateInput(attrs={
+                'class': 'calendar-field',
+                'autocomplete': 'off'
+            }),
+            'end_of_vacation': forms.DateInput(attrs={
+                'class': 'calendar-field',
+                'autocomplete': 'off'    
+            }),
         }
 
     def clean(self):
