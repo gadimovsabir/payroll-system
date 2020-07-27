@@ -35,6 +35,23 @@ class AddEmployee(TemplateView):
     )
 
     def get(self, request, *args, **kwargs):
+        try:
+            employee = models.Employee.objects.get(id=int(request.GET['id']))
+        except (KeyError, ValueError, models.Employee.DoesNotExist):
+            return self.render_to_response({'employee_form': self.employee_form})
+        
+        if request.GET.get('form') == 'old_work_place_form':
+            return self.render_to_response({
+                'old_work_place_form': self.old_work_place_form,
+                'employee_id': employee.id
+            })
+
+        if request.GET.get('form') == 'current_job_form':
+            return self.render_to_response({
+                'current_job_form': self.current_job_form,
+                'employee_id': employee.id
+            })
+        
         return self.render_to_response({'employee_form': self.employee_form})
 
     def post(self, request, *args, **kwargs):
@@ -43,18 +60,18 @@ class AddEmployee(TemplateView):
                 try:
                     return eval(f'self.{action}(request)')
                 except self.InvalidData:
-                    self.render_to_response({'employee_form': self.employee_form})
+                    return HttpResponseRedirect(reverse('hr:add_employee'))
 
-        return self.render_to_response({'employee_form': self.employee_form})
+        return HttpResponseRedirect(reverse('hr:add_employee'))
 
     def _add_employee(self, request):
         employee_form = forms.EmployeeForm(request.POST, request.FILES)
+
         if employee_form.is_valid():
             employee_id = employee_form.save().id
-            return self.render_to_response({
-                'old_work_place_form': self.old_work_place_form,
-                'employee_id': employee_id
-            })
+            return HttpResponseRedirect(
+                '/hr/addemployee/' + f'?id={employee_id}&form=old_work_place_form'
+            )
 
         return self.render_to_response({'employee_form': employee_form})
 
@@ -64,11 +81,9 @@ class AddEmployee(TemplateView):
 
         if old_work_place_form.is_valid():
             self._create_old_work_place(old_work_place_form.cleaned_data, employee)
-
-            return self.render_to_response({
-                'old_work_place_form': self.old_work_place_form,
-                'employee_id': employee.id
-            })
+            return HttpResponseRedirect(
+                '/hr/addemployee/' + f'?id={employee.id}&form=old_work_place_form'
+            )
 
         return self.render_to_response({
             'old_work_place_form': old_work_place_form,
@@ -81,11 +96,9 @@ class AddEmployee(TemplateView):
 
         if old_work_place_form.is_valid():
             self._create_old_work_place(old_work_place_form.cleaned_data, employee)
-
-            return self.render_to_response({
-                'current_job_form': self.current_job_form,
-                'employee_id': employee.id
-            })
+            return HttpResponseRedirect(
+                '/hr/addemployee/' + f'?id={employee.id}&form=current_job_form'
+            )
 
         return self.render_to_response({
             'old_work_place_form': old_work_place_form,
@@ -93,10 +106,9 @@ class AddEmployee(TemplateView):
         })
 
     def _pass(self, request):
-        return self.render_to_response({
-            'current_job_form': self.current_job_form,
-            'employee_id': self._get_employee(request).id
-        })
+        return HttpResponseRedirect(
+            '/hr/addemployee/' + f'?id={self._get_employee(request).id}&form=current_job_form'
+        )
 
     def _set_work_place(self, request):
         employee = self._get_employee(request)
@@ -112,19 +124,12 @@ class AddEmployee(TemplateView):
                 salary=current_job_form.cleaned_data['salary'],
                 employee=employee
             )
-
-            return HttpResponseRedirect(reverse('hr:index'))
+            return HttpResponseRedirect(f'/hr/{employee.id}/')
 
         return self.render_to_response({
             'current_job_form': current_job_form,
             'employee_id': employee.id
         })
-
-    def _get_employee(self, request):
-        try:
-            return models.Employee.objects.get(id=request.POST['employee'])
-        except (KeyError, models.Employee.DoesNotExist):
-            raise self.InvalidData
 
     def _create_old_work_place(self, cleaned_data, employee):
         models.OldWorkPlace.objects.create(
@@ -135,6 +140,12 @@ class AddEmployee(TemplateView):
             reason_of_leave=cleaned_data['reason_of_leave'],
             employee=employee
         )
+
+    def _get_employee(self, request):
+        try:
+            return models.Employee.objects.get(id=request.POST['employee'])
+        except (KeyError, models.Employee.DoesNotExist):
+            raise self.InvalidData
 
     class InvalidData(Exception):
         pass
