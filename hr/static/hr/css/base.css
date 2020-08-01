@@ -14,13 +14,22 @@ a {
   text-decoration: none;
 }
 
+ul {
+  list-style: none;
+}
+
+.base-layout {
+  padding-left: 191px;
+}
+
 /* SIDEBAR */
 
 .sidebar {
-  width: 200px;
-  position: fixed;
+  width: 190px;
   height: 100%;
-  border-right: solid 2px rgb(241, 243, 245);
+  position: fixed;
+  left: 0;
+  border-right: solid 1px rgb(222, 226, 230);
   background-color: #fff;
 }
 
@@ -28,24 +37,24 @@ a {
   padding: 10px 15px;
 }
 
-.link {
+.sidebar__link {
   font-weight: 700;
   position: relative;
   display: block;
   padding: 10px 0 10px 50px;
 }
 
-.link:hover {
+.sidebar__link:hover {
   background-color: rgb(241, 243, 245);
 }
 
-.selected-link {
+.sidebar__link_current {
   background-color: rgb(241, 243, 245);
   border: solid 1px rgb(222, 226, 230);
   border-right: none;
 }
 
-.link::before {
+.sidebar__link::before {
   content: "";
   width: 24px;
   height: 24px;
@@ -65,25 +74,21 @@ a {
   background: no-repeat url(../img/vacations-icon.svg);
 }
 
-/* MAIN */
+/* BASE-CONTAINER */
 
 header {
-  box-shadow: 0 0px 6px rgb(150, 150, 150);
+  box-shadow: 0 0 6px rgb(150, 150, 150);
   text-align: right;
 }
 
 .container {
-  width: 100%;
-  padding: 15px 15px 15px 217px;
-  box-sizing: border-box;
-}
-
-.row {
-  display: flex;
+  width: 969px;
+  margin: 0 auto;
+  padding: 15px;
 }
 
 .logout {
-  padding-right: 25px;
+  padding-right: 21px;
   position: relative;
 }
 
@@ -94,17 +99,25 @@ header {
   height: 16px;
   position: absolute;
   top: 1px;
-  right: 4px;
+  right: 0;
+}
+
+.row {
+  display: flex;
 }
 
 /* EMPLOYEE PROFILE */
 
-.photo {
+.employee-photo {
   display: block;
   margin: auto;
 }
 
-.photo-size {
+.default-photo {
+  border-bottom: solid 2px rgb(222, 226, 230);
+}
+
+.employee-photo-size {
   width: 200px;
   height: 266px;
 }
@@ -123,13 +136,12 @@ header {
 }
 
 .actions li {
-  list-style: none;
   padding: 5px 0;
+  border-radius: 5px;
 }
 
 .actions li:hover {
   background-color: rgb(241, 243, 245);
-  border-radius: 5px;
 }
 
 .actions a {
@@ -140,9 +152,9 @@ header {
 .actions a::before {
   content: "";
   position: absolute;
-  width: 16px;
-  height: 16px;
-  left: 3px;
+  width: 15px;
+  height: 15px;
+  left: 4px;
   top: 3px;
 }
 
@@ -189,12 +201,35 @@ table {
 }
 
 th, td {
-  border: 1px solid rgb(222, 226, 230);
-  padding: 7px;
+  border: solid 1px #dee2e6;
+  padding: 7px 5px;
+  white-space: nowrap;
 }
 
-.employees-table tbody tr:hover, .employees-table th:hover {
+.table-wrapper {
+  overflow: auto;
+  border: solid 1px #dee2e6;
+  border-top: none;
+  border-bottom: none;
+}
+
+.employees-table {
+  width: 100%;
   cursor: pointer;
+}
+
+.employees-table td {
+  border-left: none;
+  border-right: none;
+}
+
+.employees-table th {
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+}
+
+.employees-table tbody tr:hover {
   box-shadow: inset 1px 0 0 #dadce0,
     inset -1px 0 0 #dadce0,
     0 1px 2px 0 rgba(60,64,67,.3),
@@ -236,8 +271,9 @@ th, td {
 
 /* FORMS */
 
-form input, form select {
+input, select {
   padding: 8px 12px;
+  border: solid 1px rgb(118, 118, 118);
   border-radius: 4px;
 }
 
@@ -247,24 +283,20 @@ form input, form select {
 
 .form-row input {
   min-width: 400px;
-  border: solid 1px rgb(118, 118, 118);
 }
 
-form input[type="file"] {
+.modal-window .form-row input {
+  min-width: auto;
+}
+
+input[type="checkbox"], input[type="radio"] {
+  min-width: auto;
+}
+
+input[type="file"] {
   padding: 0;
   min-width: auto;
   border: none;
-}
-
-form input[type="submit"] {
-  border: none;
-  font-size: 16px;
-  font-family: "Roboto", sans-serif;
-  cursor: pointer;
-}
-
-form input[type="checkbox"] {
-  min-width: auto;
 }
 
 .label-div {
@@ -273,19 +305,24 @@ form input[type="checkbox"] {
 }
 
 .errorlist {
-  list-style: none;
   color: red;
 }
 
 .submit-row {
   padding-top: 42px;
   text-align: right;
-  padding-right: 10%;
+}
+
+.submit-btn {
+  border: none;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  color: #fff;
 }
 
 .blue-btn {
   background-color: rgb(0, 123, 255);
-  color: rgb(255, 255, 255);
 }
 
 .blue-btn:hover {
@@ -293,9 +330,8 @@ form input[type="checkbox"] {
   transition: background-color .15s ease-in-out;
 }
 
-.delete-button {
+.red-btn {
   background-color: #ba2121;
-  color: #fff;
 }
 
 .cancle-btn {
@@ -304,16 +340,25 @@ form input[type="checkbox"] {
   border-radius: 4px;
 }
 
+.radio-field li {
+  display: inline;
+  margin-right: 15px;
+}
+
+.radio-field li:first-child {
+  display: none;
+}
+
 /* COLUMNS */
 
 .col-lg-3 {
   width: 25%;
 }
 
-.col-lg-9 {
-  width: 75%;
-}
-
 .col-lg-6 {
   width: 50%;  
+}
+
+.col-lg-9 {
+  width: 75%;
 }

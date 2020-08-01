@@ -1,8 +1,8 @@
 {% extends "hr/base.html" %}
 {% load i18n static %}
-{% block title %}İşçi əlavə et{% endblock %}
-{% block main %}
-<form action="{% url "hr:add_employee" %}" method="POST" enctype="multipart/form-data" {% if old_work_place_form %}novalidate{% endif %}>
+{% block title %}İşçinin qeydiyatı{% endblock %}
+{% block main_content %}
+<form method="POST" enctype="multipart/form-data" {% if old_work_place_form %}novalidate{% endif %}>
   {% csrf_token %}
   {% if employee_form %}
     {% for field in employee_form %}
@@ -12,7 +12,7 @@
       </div>
     {% endfor %}
     <div class="submit-row">
-      <input class="blue-btn" type="submit" name="_add_employee" value="Göndər">
+      <input class="blue-btn submit-btn" type="submit" name="_add_employee" value="Göndər">
     </div>
   {% elif old_work_place_form %}
     <input type="hidden" name="employee" value="{{ employee_id }}">
@@ -23,9 +23,9 @@
       </div>
     {% endfor %}
     <div class="submit-row">
-      <input class="blue-btn" type="submit" name="_add_another" value="Yadda saxla və yenisini əlavə et">
-      <input class="blue-btn" type="submit" name="_add_and_pass" value="Yadda saxla">
-      <input class="blue-btn" type="submit" name="_pass" value="Keç">
+      <input class="blue-btn submit-btn" type="submit" name="_add_another" value="Yadda saxla və yenisini əlavə et">
+      <input class="blue-btn submit-btn" type="submit" name="_add_and_pass" value="Yadda saxla">
+      <input class="blue-btn submit-btn" type="submit" name="_pass" value="Keç">
     </div>
   {% elif current_job_form %}
     <input type="hidden" name="employee" value="{{ employee_id }}">
@@ -36,7 +36,7 @@
       </div>
     {% endfor %}
     <div class="submit-row">
-      <input class="blue-btn" type="submit" name="_set_work_place" value="Göndər">
+      <input class="blue-btn submit-btn" type="submit" name="_set_work_place" value="Göndər">
     </div>
   {% endif %}
 </form>

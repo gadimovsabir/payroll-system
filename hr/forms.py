@@ -82,7 +82,9 @@ class EmployeeForm(forms.ModelForm):
         ]
 
         widgets = {
-            'date_of_birth': forms.DateInput(attrs={'class': 'date-field'})
+            'date_of_birth': forms.DateInput(attrs={'class': 'date-field'}),
+            'gender': forms.RadioSelect(attrs={'class': 'radio-field'}),
+            'family_status': forms.RadioSelect(attrs={'class': 'radio-field'})
         }
 
     def clean_passport_number(self):

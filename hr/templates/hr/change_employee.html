@@ -1,8 +1,8 @@
 {% extends "hr/base.html" %}
 {% load i18n static %}
 {% block title %}İşçin məlumatlarını redaktə et{% endblock %}
-{% block main %}
-<form method="POST">
+{% block main_content %}
+<form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   {% for field in employee_form %}
     <div class="form-row row">
@@ -11,7 +11,7 @@
     </div>
   {% endfor %}
   <div class="submit-row">
-    <input type="submit" value="Redaktə et">
+    <input class="blue-btn submit-btn" type="submit" value="Redaktə et">
   </div>
 </form>
 {% endblock %}

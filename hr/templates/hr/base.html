@@ -1,33 +1,38 @@
 {% load i18n static %}<!DOCTYPE html>
 <html>
 <head>
-  <title>{% block title %}{% endblock %}</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="{% static "hr/css/base.css" %}">
-  {% block extrastyle %}{% endblock %}
 </head>
 <body>
-  <div class="sidebar">
-    <h2>Payroll system</h2>
-    <a class="link employees-icon" href="{% url "hr:index" %}">İşçilər</a>
-    <a class="link add-employee-icon" href="{% url "hr:add_employee" %}">Qeydiyyat</a>
-    <a class="link vacations-icon" href="{% url "hr:vacations" %}">Məzuniyyətlər</a>
+  <div class="base-layout">
+    <div class="sidebar">
+      <h2>Payroll system</h2>
+      <a class="sidebar__link employees-icon" href="{% url "hr:index" %}">İşçilər</a>
+      <a class="sidebar__link add-employee-icon" href="{% url "hr:add_employee" %}">İşçinin qeydiyyatı</a>
+      <a class="sidebar__link vacations-icon" href="{% url "hr:vacations" %}">Məzuniyyətlər</a>
+    </div>
+    <div class="base-container">
+      <header>
+        <div class="container">
+          <a class="logout" href="#">ÇIX</a>
+        </div>
+      </header>
+      <main class="container">
+        {% block main_content %}{% endblock %}
+      </main>
+    </div>
   </div>
-  <header class="container">
-    <a class="logout" href="#">ÇIX</a>
-  </header>
-  <main class="container">
-    {% block main %}{% endblock %}
-  </main>
-  <script type="text/javascript">
+  <script>
     "use strict";
 
-    let links = document.querySelectorAll(".link");
+    const links = document.querySelectorAll(".sidebar__link");
 
     for (let link of links) {
       if (link.href == window.location.href) {
-        link.classList.add("selected-link");
+        link.classList.add("sidebar__link_current");
         break;
       }
     }

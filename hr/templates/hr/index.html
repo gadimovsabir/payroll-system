@@ -1,60 +1,69 @@
 {% extends "hr/base.html" %}
 {% load i18n static %}
 {% block title %}İşçilər cədvəli{% endblock %}
-{% block main %}
-<table class="employees-table">
-  <thead>
-    <tr>
-      <th>Adı</th>
-      <th>Soyadı</th>
-      <th>Ata adı</th>
-      <th>Yaşı</th>
-      <th>Şirkəti</th>
-      <th>Şöbəsi</th>
-      <th>İxtisası</th>
-      <th>Filialı</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for employee in employees %}
-      <tr data-href="{{ employee.id }}">
-        <td>{{ employee.first_name }}</td>
-        <td>{{ employee.last_name }}</td>
-        <td>{{ employee.father_name }}</td>
-        <td>{{ employee.get_age }}</td>
-        <td>{{ employee.currentjob.company.name }}</td>
-        <td>{{ employee.currentjob.department.name }}</td>
-        <td>{{ employee.currentjob.position.name }}</td>
-        <td>{{ employee.currentjob.branch.name }}</td>
+{% block main_content %}
+<div class="table-wrapper">
+  <table class="employees-table">
+    <thead>
+      <tr>
+        <th>Adı</th>
+        <th>Soyadı</th>
+        <th>Ata adı</th>
+        <th>Yaşı</th>
+        <th>Şirkəti</th>
+        <th>Şöbəsi</th>
+        <th>İxtisası</th>
+        <th>Filialı</th>
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {% for employee in employees %}
+        <tr data-href="{{ employee.id }}">
+          <td>{{ employee.first_name }}</td>
+          <td>{{ employee.last_name }}</td>
+          <td>{{ employee.father_name }}</td>
+          <td>{{ employee.get_age }}</td>
+          <td>{{ employee.currentjob.company.name }}</td>
+          <td>{{ employee.currentjob.department.name }}</td>
+          <td>{{ employee.currentjob.position.name }}</td>
+          <td>{{ employee.currentjob.branch.name }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}
 {% block scripts %}
-<script type="text/javascript">
+<script>
   "use strict";
 
-  let employeesTable = document.querySelector(".employees-table");
-  let index;
+  const employeesTable = document.querySelector(".employees-table");
+  const tableRows = Array.from(employeesTable.tBodies[0].rows);
+  let cellIndex;
 
   employeesTable.addEventListener("click", function(event) {
-    let target = event.target.closest("[data-href]") || event.target.closest("th");
+    const target = event.target.closest("[data-href]") || event.target.closest("th");
     
     if (!target) {
       return;
-    } else if (target.nodeName == "TR") {
+    } else if (target.dataset.href) {
       window.location += target.dataset.href + '/';
-    } else if (target.nodeName == "TH" && index != target.cellIndex) {
-      let rows = Array.from(employeesTable.tBodies[0].rows);
-      index = target.cellIndex;
-
-      rows.sort(function(tr1, tr2) {
-        return tr1.cells[index].textContent.localeCompare(tr2.cells[index].textContent, "az");
-      });
-
-      employeesTable.tBodies[0].append(...rows);
+      return;
+    } else if (target.nodeName != "TH") {
+      return;
     }
+
+    if (cellIndex != target.cellIndex) {
+      cellIndex = target.cellIndex;
+
+      tableRows.sort(function(tr1, tr2) {
+        return tr1.cells[cellIndex].textContent.localeCompare(tr2.cells[cellIndex].textContent, "az");
+      });
+    } else {
+      tableRows.reverse();
+    }
+
+    employeesTable.tBodies[0].append(...tableRows);
   });
 </script>
 {% endblock %}

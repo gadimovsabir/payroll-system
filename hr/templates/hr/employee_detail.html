@@ -1,7 +1,7 @@
 {% extends "hr/base.html" %}
 {% load i18n static %}
 {% block title %}{{ employee }}{% endblock %}
-{% block main %}
+{% block main_content %}
 {% if form %}
   <div class="modal-window-background">
     <div class="modal-window">
@@ -10,14 +10,14 @@
         {{ form.non_field_errors }}
         <input type="hidden" name="employee" value="{{ employee.id }}">
         {% for field in form.visible_fields %}
-          <div>
+          <div class="form-row">
             <div>{{ field.label_tag }}</div>
             <div>{{ field }} {{ field.errors }}</div>
           </div>
         {% endfor %}
         <div class="submit-row">
           <a class="cancle-btn" href="/hr/{{ employee.id }}/">Geri dön</a>
-          <input class="blue-btn" type="submit" value="Göndər">
+          <input class="blue-btn submit-btn" type="submit" value="Göndər">
         </div>
       </form>
     </div>
@@ -27,9 +27,13 @@
 <div class="row">
   <div class="col-lg-3">
     {% if employee.photo %}
-      <img class="photo photo-size" src="{{ employee.photo.url }}" alt="employee photo">
+      <img class="employee-photo employee-photo-size" src="{{ employee.photo.url }}" alt="employee photo">
     {% else %}
-      <img class="photo" src="{% static "/hr/img/default_photo.jpg" %}" alt="employee photo">
+      {% if employee.gender == "K" %}
+        <img class="employee-photo default-photo"  alt="employee photo" src="{% static "/hr/img/man.jpg" %}">
+      {% else %}
+        <img class="employee-photo default-photo"  alt="employee photo" src="{% static "/hr/img/woman.jpg" %}">
+      {% endif %}
     {% endif %}
     <div class="actions">
       <h4>Əməliyyatlar</h4>
