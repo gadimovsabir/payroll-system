@@ -2,28 +2,6 @@
 {% load i18n static %}
 {% block title %}{{ employee }}{% endblock %}
 {% block main_content %}
-{% if form %}
-  <div class="modal-window-background">
-    <div class="modal-window">
-      <form method="POST">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        <input type="hidden" name="employee" value="{{ employee.id }}">
-        {% for field in form.visible_fields %}
-          <div class="form-row">
-            <div>{{ field.label_tag }}</div>
-            <div>{{ field }} {{ field.errors }}</div>
-          </div>
-        {% endfor %}
-        <div class="submit-row">
-          <a class="cancle-btn" href="/hr/{{ employee.id }}/">Geri dön</a>
-          <input class="blue-btn submit-btn" type="submit" value="Göndər">
-        </div>
-      </form>
-    </div>
-  </div>
-  <script type="text/javascript" src="{% static "hr/js/forms.js" %}"></script>
-{% endif %}
 <div class="row">
   <div class="col-lg-3">
     {% if employee.photo %}
@@ -38,11 +16,80 @@
     <div class="actions">
       <h4>Əməliyyatlar</h4>
       <ul>
-        <li><a class="change-icon" href="change/">Redaktə et</a></li>
-        <li><a class="send-vacation-icon" href="?form=vacation_form">Məzuniyyətə göndər</a></li>
-        <li><a class="dismiss-employee-icon" href="delete/">İşdən azad et</a></li>
+        <li><a class="change-icon action" href="change/">Redaktə et</a></li>
+        <li><a class="send-vacation-icon action" data-form_id="vacationForm">Məzuniyyətə göndər</a></li>
+        <li><a class="dismiss-employee-icon action" data-form_id="deleteForm">İşdən azad et</a></li>
       </ul>
     </div>
   </div>
 </div>
+<div class="modal-window-background">
+  <div class="modal-window">
+    <div class="row modal-window__head">
+      <div class="close-window">
+        <div></div>
+      </div>
+    </div>
+    <form id="vacationForm" method="POST">
+      <input type="hidden" name="employee" value="{{ employee.id }}">
+      {% csrf_token %}
+      {{ vacation_form.non_field_errors }}
+      {% for field in vacation_form.visible_fields %}
+        <div class="form-row">
+          <div>{{ field.label_tag }}</div>
+          <div>{{ field }} {{ field.errors }}</div>
+        </div>
+      {% endfor %}
+      <div class="submit-row">
+        <input class="blue-btn submit-btn" type="submit" value="Göndər">
+      </div>
+    </form>
+    <form id="deleteForm" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="employee" value="{{ employee.id }}">
+      <p class="form-row">{{ employee }} adda işçi işden azad edilsin?</p>
+      <p class="form-row">
+        <img src="{% static "hr/img/icon-alert.svg" %}" alt="DİQQƏT!">
+        İşçi işdən azad edilsə onun bütün məlumatları sistemden silinəcək.
+      </p>
+      <div class="submit-row">
+        <input class="red-btn submit-btn" type="submit" name="_delete_employee" value="İşdən azad et">
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static "hr/js/forms.js" %}"></script>
+<script>
+  "use strict";
+
+  const actionsContainer = document.querySelector(".actions");
+  const windowBackground = document.querySelector(".modal-window-background");
+  const closeWindowButton = document.querySelector(".close-window");
+
+  {% if vacation_form.is_bound %}
+  windowBackground.classList.add("show");
+  document.getElementById("vacationForm").classList.add("show");
+  {% endif %}
+
+  actionsContainer.addEventListener("click", function(event) {
+    if (event.target.dataset.form_id) {
+      console.log(2)
+      windowBackground.classList.add("show");
+      document.getElementById(event.target.dataset.form_id).classList.add("show");
+    }
+  });
+
+  windowBackground.addEventListener("click", closeWindow);
+  closeWindowButton.addEventListener("click", closeWindow);
+
+  function closeWindow(event) {
+    if (event.target == windowBackground || event.target.closest(".close-window")) {
+      windowBackground.classList.remove("show");
+      let forms = document.querySelectorAll(".modal-window-background form");
+      forms.forEach((form) => form.classList.remove("show"));
+    }
+  }
+</script>
 {% endblock %}

@@ -202,7 +202,7 @@ function setDate(event) {
   let monthNumber = MONTH_NAMES.indexOf(selectedMonth.textContent.slice(0, index)) + 1;
   let year = selectedMonth.textContent.slice(index + 1); 
   openedCalendar.field.value = `${event.target.textContent}.${monthNumber}.${year}`;
-  openCalendar.container.remove();
+  openedCalendar.container.remove();
   openedCalendar.field.addEventListener("click", openCalendar);
   openedCalendar = null;
 };

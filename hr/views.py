@@ -156,18 +156,19 @@ class EmployeeDetail(TemplateView):
 
     def get(self, request, pk, *args, **kwargs):
         employee = get_object_or_404(models.Employee, pk=pk)
-        context = {'employee': employee}
-
-        if request.GET.get('form') == 'vacation_form':
-            context['form'] = forms.VacationForm()
+        context = {'employee': employee, 'vacation_form': forms.VacationForm()}
 
         return self.render_to_response(context)
 
-    def post(self, request, *args, **post):
-        vacation_form = forms.VacationForm(request.POST)
-
+    def post(self, request, *args, **kwargs):
         try:
             employee = models.Employee.objects.get(pk=request.POST['employee'])
+
+            if request.POST.get('_delete_employee'):
+                employee.delete()
+                return HttpResponseRedirect(reverse("hr:index"))
+
+            vacation_form = forms.VacationForm(request.POST)
             current_job = models.CurrentJob.objects.get(employee_id=employee.id)
         except (KeyError, models.Employee.DoesNotExist):
             return HttpResponseRedirect(reverse('hr:index'))
@@ -178,27 +179,12 @@ class EmployeeDetail(TemplateView):
             vacation_form.save()
             current_job.count_since = vacation_form.cleaned_data['end_of_vacation']
             current_job.save()
-            return self.render_to_response({'employee': employee})
+            return HttpResponseRedirect(f'/hr/{employee.id}/')
 
         return self.render_to_response({
             'employee': employee,
-            'form': vacation_form
+            'vacation_form': vacation_form
         })
-
-
-class DeleteEmployee(TemplateView):
-    template_name = 'hr/delete_confirmation.html'
-
-    def get(self, request, pk, *args, **kwargs):
-        employee = get_object_or_404(models.Employee, pk=pk)
-        return self.render_to_response({'employee': employee})
-
-    def post(self, request, pk, *args, **kwargs):
-        try:
-            employee = models.Employee.objects.get(pk=pk)
-            employee.delete()
-        finally:
-            return HttpResponseRedirect(reverse('hr:index'))
 
 
 class ChangeEmployee(TemplateView):
