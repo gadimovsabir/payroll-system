@@ -1,7 +1,8 @@
 {% extends 'hr/base.html' %}
 {% block title %}Məzuniyyətlər{% endblock %}
 {% block main_content %}
-<table>
+<div class="table-wrapper">
+<table class="employees-table">
   <thead>
     <tr>
       <th>İşçi</th>
@@ -21,4 +22,5 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 {% endblock %}

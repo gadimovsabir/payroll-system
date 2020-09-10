@@ -21,7 +21,7 @@ PLACE_NAME_VALIDATOR = RegexValidator(
 
 
 class EmployeeForm(forms.ModelForm):
-    first_name = forms.CharField(label='Adı', validators=[EMPLOYEE_NAME_VALIDATOR]  )
+    first_name = forms.CharField(label='Adı', validators=[EMPLOYEE_NAME_VALIDATOR])
     last_name = forms.CharField(label='Soyadı', validators=[EMPLOYEE_NAME_VALIDATOR])
     father_name = forms.CharField(
         label='Atasının adı',

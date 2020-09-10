@@ -39,7 +39,7 @@ class AddEmployee(TemplateView):
             employee = models.Employee.objects.get(id=int(request.GET['id']))
         except (KeyError, ValueError, models.Employee.DoesNotExist):
             return self.render_to_response({'employee_form': self.employee_form})
-        
+
         if request.GET.get('form') == 'old_work_place_form':
             return self.render_to_response({
                 'old_work_place_form': self.old_work_place_form,
@@ -51,7 +51,7 @@ class AddEmployee(TemplateView):
                 'current_job_form': self.current_job_form,
                 'employee_id': employee.id
             })
-        
+
         return self.render_to_response({'employee_form': self.employee_form})
 
     def post(self, request, *args, **kwargs):

@@ -6,8 +6,8 @@
   {% csrf_token %}
   {% for field in employee_form %}
     <div class="form-row row">
-      <div class="col-lg-3 label-div">{{ field.label_tag }}</div>
-      <div class="col-lg-9">{{ field }} {{ field.errors }}</div>
+      <div class="col-3 label-div">{{ field.label_tag }}</div>
+      <div class="col-9">{{ field }} {{ field.errors }}</div>
     </div>
   {% endfor %}
   <div class="submit-row">

@@ -1,4 +1,5 @@
-{% load i18n static %}<!DOCTYPE html>
+{% load i18n static %}
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -34,7 +35,7 @@
 
     for (let link of links) {
       if (link.href == window.location.href) {
-        link.classList.add("sidebar__link_current");
+        link.classList.add("sidebar__link-current");
         break;
       }
     }

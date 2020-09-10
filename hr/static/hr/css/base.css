@@ -7,6 +7,7 @@
 
 body {
   font-family: "Roboto", sans-serif;
+  font-size: 16px;
 }
 
 a {
@@ -29,6 +30,7 @@ ul {
   height: 100%;
   position: fixed;
   left: 0;
+  top: 0;
   border-right: solid 1px rgb(222, 226, 230);
   background-color: #fff;
 }
@@ -48,7 +50,7 @@ ul {
   background-color: rgb(241, 243, 245);
 }
 
-.sidebar__link_current {
+.sidebar__link-current {
   background-color: rgb(241, 243, 245);
   border: solid 1px rgb(222, 226, 230);
   border-right: none;
@@ -186,7 +188,7 @@ header {
 
 .modal-window {
   width: 30%;
-  margin: 15% auto 0;
+  margin: 20vh auto 0;
   background-color: #fff;
   border-radius: 4px;
   padding: 15px;
@@ -249,6 +251,7 @@ th, td {
   background-color: #343a40;
   color: #fff;
   border: none;
+  text-align: left;
 }
 
 .employees-table tbody tr:hover {
@@ -373,14 +376,14 @@ input[type="file"] {
 
 /* COLUMNS */
 
-.col-lg-3 {
+.col-3 {
   width: 25%;
 }
 
-.col-lg-6 {
+.col-6 {
   width: 50%;  
 }
 
-.col-lg-9 {
+.col-9 {
   width: 75%;
 }
